@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "97894857568",
+    "project_id": "cie-photo-clash",
+    "storage_bucket": "cie-photo-clash.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:97894857568:android:11e9b39298771ab04d7c05",
+        "android_client_info": {
+          "package_name": "com.example.cie_photo_clash"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "97894857568-jsv3bq38no6c363opoiis97sl4v1j48b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cie_photo_clash",
+            "certificate_hash": "a886f383f5f85b7cb24e71a78d9d58cace03c3c9"
+          }
+        },
+        {
+          "client_id": "97894857568-us32aioeli1go2lho4043v9pr6ibpth0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoHtzOzGrZ84A_517d5Vk_v9z3KmhPNI0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "97894857568-us32aioeli1go2lho4043v9pr6ibpth0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

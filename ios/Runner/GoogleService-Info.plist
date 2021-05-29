@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>97894857568-2nd56fseeh3nqamct3oc5hdkpqr4si4f.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.97894857568-2nd56fseeh3nqamct3oc5hdkpqr4si4f</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>97894857568-jsv3bq38no6c363opoiis97sl4v1j48b.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBvDyC0tN1YbdpRWZSk_eDDyfWv_M7UQX4</string>
+	<key>GCM_SENDER_ID</key>
+	<string>97894857568</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.ciePhotoClash</string>
+	<key>PROJECT_ID</key>
+	<string>cie-photo-clash</string>
+	<key>STORAGE_BUCKET</key>
+	<string>cie-photo-clash.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:97894857568:ios:5996c943139100fd4d7c05</string>
+</dict>
+</plist>
