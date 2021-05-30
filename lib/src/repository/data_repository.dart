@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cie_photo_clash/src/blocs/data/api_response.dart';
 import 'package:cie_photo_clash/src/model/cie_user.dart';
+import 'package:cie_photo_clash/src/model/like.dart';
 import 'package:cie_photo_clash/src/model/post.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -147,5 +148,50 @@ class DataRepository {
     } on FirebaseAuthException catch (e) {
       return ApiResponse(data: e.message, error: true);
     }
+  }
+
+  Stream<List<Like>> likes(String postId) {
+    return FirebaseFirestore.instance
+        .collection("post_likes")
+        .doc(postId)
+        .collection('likes')
+        .where('postId', isEqualTo: '$postId')
+        .snapshots()
+        .asyncMap((snapshots) async {
+      return await convertLikeSnapshots(snapshots);
+    });
+  }
+
+  Future<void> addLike(Like like) async {
+    try {
+      var ref = FirebaseFirestore.instance
+          .collection('post_likes')
+          .doc(like.postId)
+          .collection('likes')
+          .doc();
+      await ref.set(like.copyWith(id: ref.id).toMap());
+    } on FirebaseException catch (e) {
+      print('Add Like Error:${e.message}');
+    }
+  }
+
+  Future<void> unLike(String uid, String postId) async {
+    try {
+      await FirebaseFirestore.instance
+          .collection('post_likes')
+          .doc(postId)
+          .collection('likes')
+          .doc(uid)
+          .delete();
+    } on FirebaseException catch (e) {
+      print('Remove Unlike Error:${e.message}');
+      return null;
+    }
+  }
+
+  Future<List<Like>> convertLikeSnapshots(QuerySnapshot snapshots) async {
+    return snapshots.docs.map((doc) {
+      return Like.fromMap(doc.data());
+    }).toList();
   }
 }

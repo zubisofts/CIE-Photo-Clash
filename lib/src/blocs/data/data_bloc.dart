@@ -82,13 +82,13 @@ class DataBloc extends Bloc<DataEvent, DataState> {
       yield LikesLoadedState(likes: event.likes);
     }
 
-    // if (event is AddLikeEvent) {
-    //   MessagingRepository().addLike(event.like);
-    // }
+    if (event is AddLikeEvent) {
+      DataRepository().addLike(event.like);
+    }
 
-    // if (event is RemoveLikeEvent) {
-    //   MessagingRepository().unLike(event.likeId, event.postId);
-    // }
+    if (event is RemoveLikeEvent) {
+      DataRepository().unLike(event.likeId, event.postId);
+    }
 
     // if (event is DeleteCommentEvent) {
     //   MessagingRepository().deleteComent(event.commentId, event.postId);

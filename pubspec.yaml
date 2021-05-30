@@ -45,8 +45,8 @@ dependencies:
   path_provider: ^2.0.1
   # form_validator: ^0.1.7
   form_field_validator: ^1.1.0
-  flutter_paystack: ^1.0.5
-  getwidget: ^2.0.1-nullsafety.4
+  # getwidget: ^2.0.1-nullsafety.4
+  flutter_sound: ^8.1.4
   sk_onboarding_screen:
     git:
       url: https://github.com/zubisofts/SKOnboardingScreen.git
