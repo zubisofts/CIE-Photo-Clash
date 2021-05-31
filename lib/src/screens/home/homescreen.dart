@@ -1,5 +1,6 @@
 import 'package:cie_photo_clash/src/repository/auth_repository.dart';
 import 'package:cie_photo_clash/src/screens/home/widgets/fab_bottom_bar.dart';
+import 'package:cie_photo_clash/src/screens/leaderbaord/leaderboard_screen.dart';
 import 'package:cie_photo_clash/src/screens/timeline/timeline_screen.dart';
 import 'package:cie_photo_clash/src/screens/upload/upload_screen.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen>
   late int activePage;
   List pages = [
     TimelineScreen(),
-    Container(),
+    LeaderboardScreen(),
   ];
 
   List<String> titles = ['Timeline', 'Gallery'];
@@ -42,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen>
         Theme.of(context).appBarTheme.systemOverlayStyle!);
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         centerTitle: true,
         elevation: 0.0,
         leading: IconButton(onPressed: () {}, icon: Icon(Icons.menu)),
@@ -82,12 +84,13 @@ class _HomeScreenState extends State<HomeScreen>
         notchedShape: CircularNotchedRectangle(),
         onTabSelected: _selectedTab,
         items: [
-          FABBottomAppBarItem(iconData: Icons.home_outlined, text: 'Home'),
+          FABBottomAppBarItem(
+              imagePath: 'assets/images/timeline.svg', text: 'Timeline'),
           // FABBottomAppBarItem(
           //     iconData: Icons.analytics_outlined, text: 'Investments'),
           // FABBottomAppBarItem(iconData: Icons.payment_outlined, text: 'Wallet'),
           FABBottomAppBarItem(
-              iconData: Icons.history_toggle_off, text: 'Archive'),
+              imagePath: 'assets/images/podium.svg', text: 'Leaderboard'),
         ],
         backgroundColor:
             Theme.of(context).bottomNavigationBarTheme.backgroundColor!,

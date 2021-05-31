@@ -1,6 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:intl/intl.dart';
 import 'package:uuid/uuid.dart';
@@ -55,41 +54,6 @@ class AppUtils {
     return time;
   }
 
-  static Future<String?> makePayment(BuildContext context,
-      PaystackPlugin paystackPlugin, dynamic amount) async {
-    Uuid referenceKey = Uuid();
-    String ref = referenceKey.v1(options: {
-      'node': [0x01, 0x23, 0x45, 0x67, 0x89, 0xab],
-      'clockSeq': 0x1234,
-      'mSecs': new DateTime.now().millisecondsSinceEpoch,
-      'nSecs': 5678
-    });
-    PaymentCard card = PaymentCard(
-        number: '4084084084084081', cvc: '408', expiryMonth: 4, expiryYear: 22);
-    Charge charge = Charge()
-      ..amount = amount * 100
-      ..reference = '$ref'
-      ..card = card
-      ..currency = 'NGN'
-      ..putMetaData("name", "NI Trades")
-      // or ..accessCode = _getAccessCodeFrmInitialization()
-      ..email = 'zubitex40@email.com'
-      ..putCustomField('Charged From', 'NI Trades');
-
-    // CheckoutResponse response =
-    //     await paystackPlugin.chargeCard(context, charge: charge);
-
-    CheckoutResponse response = await paystackPlugin.checkout(
-      context,
-      method: CheckoutMethod.card, // Defaults to CheckoutMethod.selectable
-      charge: charge,
-    );
-
-    print('Transaction Response: ${response.status}');
-
-    return response.status ? ref : null;
-  }
-
   static Stream<String> getInvestmentCountDown(int startDate, int months) {
     return Stream.periodic(Duration(seconds: 1), (__) {
       var advanceDaysInMillis = (31 * months) * 8.64e+7;
@@ -105,7 +69,6 @@ class AppUtils {
     var advanceDaysInMillis = (31 * months) * 8.64e+7;
     var advanceDate = startDate + advanceDaysInMillis;
     var d = advanceDate - (DateTime.now().millisecondsSinceEpoch);
-
     var difference = (d / 8.64e+7).round();
     return difference;
   }

@@ -96,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           context.read<AuthBloc>().add(LoginWithFacebokEvent());
                         },
                         minWidth: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.all(16.0),
+                        padding: EdgeInsets.all(12.0),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(32.0)),
                         color: Color(0xFF4267b3),
@@ -126,16 +126,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           if (state is AuthLoadingState) {
                             showDialog(
                               context: context,
-                              builder: (context) => AlertDialog(
-                                backgroundColor: Theme.of(context)
-                                    .cardColor
-                                    .withOpacity(0.5),
-                                content: Center(
-                                  child: SpinKitDualRing(
-                                    color: Theme.of(context).iconTheme.color!,
-                                    lineWidth: 2,
-                                    size: 45,
-                                  ),
+                              builder: (context) => Center(
+                                child: SpinKitDualRing(
+                                  color: Theme.of(context).iconTheme.color!,
+                                  lineWidth: 2,
+                                  size: 45,
                                 ),
                               ),
                             );
@@ -160,7 +155,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   .add(LoginWithGoogleEvent());
                             },
                             minWidth: MediaQuery.of(context).size.width,
-                            padding: EdgeInsets.all(16.0),
+                            padding: EdgeInsets.all(12.0),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(32.0)),
                             color: Colors.white,

@@ -8,6 +8,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter_image_compress/flutter_image_compress.dart';
+import 'package:intl/intl.dart';
 import 'package:path_provider/path_provider.dart';
 
 class StorageException implements Exception {
@@ -99,7 +100,24 @@ class DataRepository {
 
   Future<ApiResponse> savePost(Post post,
       {required String uid, required File photo}) async {
+    var now = DateTime.now();
+    var date = DateTime(now.year, now.month, now.day);
+    var today = date.millisecondsSinceEpoch;
+
     try {
+      // Check if the data has already been uploaded for today
+      var snapshot = await FirebaseFirestore.instance
+          .collection("posts")
+          .where('userId', isEqualTo: post.userId)
+          .where('timestamp', isEqualTo: today)
+          .get();
+      if (snapshot.size > 0) {
+        return ApiResponse(
+            data: 'You are only allowed to upload 1 image per day!',
+            error: true);
+      }
+
+      // If not already uploaded, upload a new one
       var documentReference =
           FirebaseFirestore.instance.collection("posts").doc();
 
@@ -107,7 +125,10 @@ class DataRepository {
           await savePostImage(uid: documentReference.id, photo: photo);
       if (!apiResponse.error) {
         await documentReference.set(post
-            .copyWith(id: documentReference.id, imagePath: apiResponse.data)
+            .copyWith(
+                id: documentReference.id,
+                imagePath: apiResponse.data,
+                timestamp: today)
             .toMap());
         return ApiResponse(data: 'Success', error: false);
       } else {
@@ -153,9 +174,20 @@ class DataRepository {
   Stream<List<Like>> likes(String postId) {
     return FirebaseFirestore.instance
         .collection("post_likes")
-        .doc(postId)
-        .collection('likes')
+        // .doc(postId)
+        // .collection('likes')
         .where('postId', isEqualTo: '$postId')
+        .snapshots()
+        .asyncMap((snapshots) async {
+      return await convertLikeSnapshots(snapshots);
+    });
+  }
+
+  Stream<List<Like>> get allLikes {
+    return FirebaseFirestore.instance
+        .collection("post_likes")
+        // .doc(postId)
+        // .collection('likes')
         .snapshots()
         .asyncMap((snapshots) async {
       return await convertLikeSnapshots(snapshots);
@@ -164,12 +196,16 @@ class DataRepository {
 
   Future<void> addLike(Like like) async {
     try {
+      var now = DateTime.now();
+      var date = DateTime(now.year, now.month, now.day);
+      var today = date.millisecondsSinceEpoch;
+
       var ref = FirebaseFirestore.instance
           .collection('post_likes')
-          .doc(like.postId)
-          .collection('likes')
+          // .doc(like.postId)
+          // .collection('likes')
           .doc();
-      await ref.set(like.copyWith(id: ref.id).toMap());
+      await ref.set(like.copyWith(id: ref.id, time: today).toMap());
     } on FirebaseException catch (e) {
       print('Add Like Error:${e.message}');
     }
@@ -179,8 +215,8 @@ class DataRepository {
     try {
       await FirebaseFirestore.instance
           .collection('post_likes')
-          .doc(postId)
-          .collection('likes')
+          // .doc(postId)
+          // .collection('likes')
           .doc(uid)
           .delete();
     } on FirebaseException catch (e) {

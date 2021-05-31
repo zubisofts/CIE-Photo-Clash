@@ -5,7 +5,7 @@
 
    <application
         android:label="cie_photo_clash"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@drawable/cie_logo">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

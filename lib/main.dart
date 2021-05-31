@@ -51,7 +51,7 @@ class _MyAppState extends State<MyApp> {
             title: 'Flutter Demo',
             darkTheme: AppTheme.darkTheme,
             theme: AppTheme.lightTheme,
-            themeMode: ThemeMode.light,
+            themeMode: ThemeMode.dark,
             home: App(),
           );
         },

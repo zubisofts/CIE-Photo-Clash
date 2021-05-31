@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class FABBottomAppBarItem {
-  FABBottomAppBarItem({required this.iconData, required this.text});
-  IconData iconData;
+  FABBottomAppBarItem({required this.imagePath, required this.text});
+  String imagePath;
   String text;
 }
 
@@ -102,7 +103,17 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(item.iconData, color: color, size: widget.iconSize),
+                _selectedIndex == index
+                    ? SvgPicture.asset(
+                        item.imagePath,
+                        width: 24.0,
+                      )
+                    : SvgPicture.asset(
+                        item.imagePath,
+                        color: Colors.grey,
+                        width: 24.0,
+                      ),
+                // Icon(item.iconData, color: color, size: widget.iconSize),
                 _selectedIndex == index
                     ? Text(
                         item.text,

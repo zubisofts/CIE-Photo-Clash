@@ -14,13 +14,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   late AuthenticationRepository authenticationRepository;
   late StreamSubscription<CIEUser?> _authStateChangesSubcription;
 
-  late String name;
-  late String email;
-  late String password;
-  late File photo;
-  late bool isEmailValid = true;
-  late bool isPasswordValid = true;
-  late bool isNameValid = true;
 
   static String uid = '';
 

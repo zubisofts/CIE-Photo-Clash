@@ -189,6 +189,7 @@ class UploadScreen extends StatelessWidget {
                                   headerAnimationLoop: false,
                                   body: Text(
                                     'Image has been uploaded successfully',
+                                    textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Theme.of(context)
                                             .colorScheme
@@ -228,6 +229,7 @@ class UploadScreen extends StatelessWidget {
                                 Theme.of(context).scaffoldBackgroundColor,
                             body: Text(
                               state.error,
+                              textAlign: TextAlign.center,
                               style: TextStyle(
                                   color:
                                       Theme.of(context).colorScheme.onPrimary),
